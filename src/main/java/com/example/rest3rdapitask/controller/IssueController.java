@@ -6,9 +6,22 @@ import com.example.rest3rdapitask.dto.issue.Issue;
 import com.example.rest3rdapitask.service.jira.IssueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import static com.example.rest3rdapitask.util.PageUri.*;
+import static com.example.rest3rdapitask.util.PageUri.ISSUE;
+import static com.example.rest3rdapitask.util.PageUri.CREATE;
+import static com.example.rest3rdapitask.util.PageUri.EDIT;
+import static com.example.rest3rdapitask.util.PageUri.COMMENT;
+import static com.example.rest3rdapitask.util.PageUri.COMMENT_DELETE;
+import static com.example.rest3rdapitask.util.PageUri.DELETE;
+import static com.example.rest3rdapitask.util.PageUri.ASSIGNED_TO_USER;
 
 @RestController
 @RequiredArgsConstructor

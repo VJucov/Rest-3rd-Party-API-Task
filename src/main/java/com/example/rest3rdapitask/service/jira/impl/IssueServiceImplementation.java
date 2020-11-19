@@ -8,12 +8,27 @@ import com.example.rest3rdapitask.exception.EmptyFieldException;
 import com.example.rest3rdapitask.service.jira.IssueService;
 import com.example.rest3rdapitask.util.CheckIfObjectNullOrEmpty;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.*;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
+
 import org.springframework.web.client.RestTemplate;
 
-import static com.example.rest3rdapitask.util.PageUri.*;
+import static com.example.rest3rdapitask.util.PageUri.JIRA_BASE_URL;
+import static com.example.rest3rdapitask.util.PageUri.CREATE_ISSUE;
+import static com.example.rest3rdapitask.util.PageUri.EDIT_ISSUE;
+import static com.example.rest3rdapitask.util.PageUri.ADD_COMMENT1;
+import static com.example.rest3rdapitask.util.PageUri.ADD_COMMENT2;
+import static com.example.rest3rdapitask.util.PageUri.DELETE_COMMENT1;
+import static com.example.rest3rdapitask.util.PageUri.DELETE_COMMENT2;
+import static com.example.rest3rdapitask.util.PageUri.DELETE_ISSUE;
+import static com.example.rest3rdapitask.util.PageUri.GET_ALL_ISSUES_ASSIGNED_TO_USER;
 
 @Service
 @RequiredArgsConstructor
@@ -30,10 +45,9 @@ public class IssueServiceImplementation implements IssueService {
         } else {
             try {
                 throw new EmptyFieldException("Please fill all necessary fields");
-            } catch (HttpClientErrorException httpClientErrorException){
-                return "You are not authorized, please sign in with your JIRA account";
-            }
-            catch (EmptyFieldException e) {
+            } catch (HttpClientErrorException httpClientErrorException) {
+                return "Something went wrong";
+            } catch (EmptyFieldException e) {
                 e.printStackTrace();
                 return e.getMessage();
             }
@@ -49,9 +63,7 @@ public class IssueServiceImplementation implements IssueService {
                     String.class);
             return "Issue with id(key) - " + issueIdOrKey + " was edited successfully";
         } catch (HttpClientErrorException httpClientErrorException) {
-            return "You are not authorized, please sign in with your JIRA account";
-        } catch (Exception  e) {
-            return "No issue with ID " + issueIdOrKey;
+            return "Something went wrong";
         }
     }
 
@@ -63,11 +75,8 @@ public class IssueServiceImplementation implements IssueService {
                     HttpMethod.POST, request,
                     String.class);
             return "Added a comment to issue with id(key) - " + issueIdOrKey;
-        } catch (HttpClientErrorException clientErrorException){
-            return "You don't have permission to delete this issue";
-        }
-        catch (Exception  e) {
-            return "No Issue with ID " + issueIdOrKey;
+        } catch (HttpClientErrorException clientErrorException) {
+            return "Something went wrong";
         }
     }
 
@@ -79,11 +88,8 @@ public class IssueServiceImplementation implements IssueService {
                     HttpMethod.DELETE, request,
                     String.class);
             return "Deleted comment to issue with id(key) - " + issueIdOrKey;
-        } catch (HttpClientErrorException clientErrorException){
-            return "You don't have permission to delete this issue";
-        }
-        catch (Exception  e) {
-            return "No Issue with ID " + issueIdOrKey;
+        } catch (HttpClientErrorException clientErrorException) {
+            return "Something went wrong";
         }
     }
 
@@ -95,11 +101,8 @@ public class IssueServiceImplementation implements IssueService {
                     HttpMethod.DELETE, request,
                     String.class);
             return "Issue with id - " + id + " was deleted successfully";
-        } catch (HttpClientErrorException clientErrorException){
-            return "You don't have permission to delete this issue";
-        }
-        catch (Exception  e) {
-            return "No Issue with ID " + id;
+        } catch (HttpClientErrorException clientErrorException) {
+            return "Something went wrong";
         }
     }
 

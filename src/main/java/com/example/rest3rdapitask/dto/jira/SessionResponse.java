@@ -10,10 +10,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SessionResponse {
-
     private LoginInfo loginInfo;
     private Session session;
-
 
     @Override
     public String toString() {

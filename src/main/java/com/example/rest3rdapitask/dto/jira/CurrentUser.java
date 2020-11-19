@@ -10,11 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CurrentUser {
-
     private String self;
     private String name;
     private LoginInfo loginInfo;
-
 
     @Override
     public String toString() {
@@ -24,5 +22,4 @@ public class CurrentUser {
                 ", loginInfo=" + loginInfo +
                 '}';
     }
-
 }

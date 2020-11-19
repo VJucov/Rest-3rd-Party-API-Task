@@ -10,12 +10,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginInfo {
-
     private String lastFailedLoginTime;
     private String previousLoginTime;
     private int loginCount;
     private int failedLoginCount;
-
 
     @Override
     public String toString() {
@@ -26,5 +24,4 @@ public class LoginInfo {
                 ", failedLoginCount=" + failedLoginCount +
                 '}';
     }
-
 }

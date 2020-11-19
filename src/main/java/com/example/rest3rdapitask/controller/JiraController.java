@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.example.rest3rdapitask.util.PageUri.*;
+import static com.example.rest3rdapitask.util.PageUri.CREATE_SESSION;
+import static com.example.rest3rdapitask.util.PageUri.AUTH;
+import static com.example.rest3rdapitask.util.PageUri.CURRENT_USER;
 
 @RestController
 @RequiredArgsConstructor
